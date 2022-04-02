@@ -22,6 +22,10 @@ public interface RoleRepository extends JpaRepository<Role, String> {
 
     @Transactional
     @Modifying
-    @Query(value = "delete from User u where u.user=:user", nativeQuery = true)
-    void deleteOldMemberRole(@Param("user") String user);
+    @Query(value = "Delete from User u where u.user=:user", nativeQuery = true)
+    void deleteMemberRole(@Param("user") String user);
+
+    @Query(value = "Select u.role_id from User u where u.user=:user", nativeQuery = true)
+    String findRoleByUserId(@Param("user") String user);
+
 }

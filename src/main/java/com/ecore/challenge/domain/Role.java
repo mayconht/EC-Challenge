@@ -28,13 +28,13 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(String id, String roleName, String roleDescription) {
+    public Role(final String id, final String roleName, final String roleDescription) {
         this.id = id;
         this.roleName = roleName;
         this.roleDescription = roleDescription;
     }
 
-    public Role(String id, String roleName) {
+    public Role(final String id, final String roleName) {
         this.id = id;
         this.roleName = roleName;
     }
@@ -43,7 +43,7 @@ public class Role implements Serializable {
         return user;
     }
 
-    public void setUser(Set<String> user) {
+    public void setUser(final Set<String> user) {
         this.user = user;
     }
 
@@ -51,7 +51,7 @@ public class Role implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -59,7 +59,7 @@ public class Role implements Serializable {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
     }
 
@@ -67,14 +67,18 @@ public class Role implements Serializable {
         return roleDescription;
     }
 
-    public void setRoleDescription(String roleDescription) {
+    public void setRoleDescription(final String roleDescription) {
         this.roleDescription = roleDescription;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Role role)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Role role)) {
+            return false;
+        }
         return id.equals(role.id);
     }
 
