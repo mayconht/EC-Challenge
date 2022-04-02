@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "96828aa9-9807-4eaa-b481-fcf8ff3f4d56",
+		"name": "ecoreChallengeCode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Specific Role",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/6ec4c0f7-ab65-49ed-9e78-90752b5d2df8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"6ec4c0f7-ab65-49ed-9e78-90752b5d2df8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all Roles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Role By Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/name/Dev",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"name",
+						"Dev"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post new role ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roleName\": \"New Role\",\r\n    \"roleDescription\": \"New Role Role\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put existent Role",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roleName\": \"Tester\",\r\n    \"roleDescription\": \"Tester Role Change\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/roles/218b6b45-a792-49e6-a844-1a2b34eb7827",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"218b6b45-a792-49e6-a844-1a2b34eb7827"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Role",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/218b6b45-a792-49e6-a844-1a2b34eb7827",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"218b6b45-a792-49e6-a844-1a2b34eb7827"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change User Role",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/rolemembers/6ec4c0f7-ab65-49ed-9e78-90752b5d2df8/0bacfe69-9de5-415d-9293-a7c49fa5d861",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"rolemembers",
+						"6ec4c0f7-ab65-49ed-9e78-90752b5d2df8",
+						"0bacfe69-9de5-415d-9293-a7c49fa5d861"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
