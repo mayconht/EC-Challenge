@@ -15,6 +15,7 @@ http://localhost:8080/roles
 or **Simply run docker.sh or docker.bat** depending on your system OS.
 
 >**The endPoint references tests are on folder \Postman and can be imported to Postman**
+>**The system is using H2 Memory DB. So there is no persistence layer in this project.**
 
 ## :pencil: Approach (Dev Review)
 The project's main idea is to integrate Roles to the User endpoint, providing a connection between roles and users.
