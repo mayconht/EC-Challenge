@@ -12,7 +12,7 @@ http://localhost:8080/roles
 
 ````docker run -d -p 8080:8080 -e DATABASE_SERVER=jdbc:h2:mem:testdb ecore/challenge:1.0.0````
 
-or **Simply run docker.sh or docker.bat** depending on your system OS.
+or **Simply run docker.sh or docker.bat** depending on your OS.
 
 >**The endPoint references tests are on folder \Postman and can be imported to Postman**
 >**The system is using H2 Memory DB. So there is no persistence layer in this project.**
@@ -31,6 +31,7 @@ The Role process should check if a user exists before assigning it a role. the s
 * Generate UUID using hibernate
 * Avoid Using Queries on Repository layer (not an issue, just clean practice)
 * Improve the Design factory with Mockito to cover more test cases.
+* Use Swagger 
 
 ## :pencil: Improvement Points (Test Ecore Review)
 * Return the correct HTTP message to the requester
