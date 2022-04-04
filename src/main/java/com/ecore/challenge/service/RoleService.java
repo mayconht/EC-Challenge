@@ -24,22 +24,16 @@ public class RoleService {
     @Autowired
     private UserExternalService userExternalService;
 
+    @Autowired
+    private TeamExternalService teamExternalService;
+
     public List<Role> filteredFindAll() {
         return roleRepository.filteredFindAll();
-    }
-
-    public List<Role> findAll() {
-        return roleRepository.findAll();
     }
 
     public Role findById(final String id) {
         final Optional<Role> obj = roleRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Role not found: " + id + " Type: " + Role.class.getName()));
-    }
-
-    public Role findByRoleName(final String roleName) {
-        final Optional<Role> obj = roleRepository.findByRoleName(roleName);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Role not found: " + roleName + " Type: " + Role.class.getName()));
     }
 
     public Role create(final Role roleObj) {
@@ -52,41 +46,31 @@ public class RoleService {
         roleRepository.save(roleObj);
     }
 
-    public void insertMemberRole(final String roleId, final String memberId) {
+    public void insertUserRole(final String roleId, final String memberId) {
         final Role role = findById(roleId);
         role.getUser().add(memberId);
         try {
             roleRepository.save(role);
         } catch (final Exception e) {
-//            TODO Add log to it!!!
             roleRepository.deleteMemberRole(memberId);
             roleRepository.save(role);
         }
     }
 
-    public void delete(final String id) {
-        findById(id);
-        roleRepository.deleteById(id);
-    }
-
-    public boolean verifyUserService(final String id) {
+    public void verifyUserService(final String id) {
         try {
-            return userExternalService.searchUserById(id);
+            userExternalService.hasUserById(id);
         } catch (final Exception e) {
             throw new ObjectNotFoundException("User ID not found or User Service not available");
         }
     }
 
-
-    public String findRoleByUserId(final String id) {
-        final String roleId = roleRepository.findRoleByUserId(id);
-        final Role role = findByRoleName(defaultRoleValue);
-        if (roleId == null) {
-            insertMemberRole(role.getId(), id);
-            return role.getId();
+    public void changeTeamRole(final String teamId, final String roleId) {
+        try {
+            final List<String> ls = teamExternalService.searchTeamById(teamId);
+            ls.forEach(item -> insertUserRole(roleId, item));
+        } catch (final Exception e) {
+            throw new ObjectNotFoundException("Team ID not found or Team Service not available");
         }
-        return role.getId();
-
     }
-
 }

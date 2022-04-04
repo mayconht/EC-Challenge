@@ -9,23 +9,20 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
 
-    Optional<Role> findByRoleName(String roleName);
-
-    @Query(value = "Select new Role(r.id, r.roleName) from Role r")
+    @Query(value = "SELECT new Role(r.id, r.name) FROM Role r")
     List<Role> filteredFindAll();
 
     @Transactional
     @Modifying
-    @Query(value = "Delete from User u where u.user=:user", nativeQuery = true)
+    @Query(value = "DELETE FROM User u WHERE u.user=:user", nativeQuery = true)
     void deleteMemberRole(@Param("user") String user);
 
-    @Query(value = "Select u.role_id from User u where u.user=:user", nativeQuery = true)
+    @Query(value = "SELECT u.role_id FROM User u WHERE u.user=:user", nativeQuery = true)
     String findRoleByUserId(@Param("user") String user);
 
 }

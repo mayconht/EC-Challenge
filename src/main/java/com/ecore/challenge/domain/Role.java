@@ -2,7 +2,12 @@ package com.ecore.challenge.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,7 +15,7 @@ import java.util.Set;
 
 
 @Entity
-@JsonInclude(JsonInclude.Include.NON_EMPTY) //TODO Descrever Sobre não trazer dados desnecessarios.
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -18,8 +23,8 @@ public class Role implements Serializable {
     private String id;
 
     @Column(nullable = false, unique = true)
-    private String roleName;
-    private String roleDescription;
+    private String name;
+    private String description;
 
     @ElementCollection
     @CollectionTable(name = "USER", uniqueConstraints = {@UniqueConstraint(columnNames = "user")})
@@ -28,15 +33,15 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(final String id, final String roleName, final String roleDescription) {
+    public Role(final String id, final String name, final String description) {
         this.id = id;
-        this.roleName = roleName;
-        this.roleDescription = roleDescription;
+        this.name = name;
+        this.description = description;
     }
 
-    public Role(final String id, final String roleName) {
+    public Role(final String id, final String name) {
         this.id = id;
-        this.roleName = roleName;
+        this.name = name;
     }
 
     public Set<String> getUser() {
@@ -55,20 +60,20 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(final String roleName) {
-        this.roleName = roleName;
+    public void setName(final String name) {
+        this.name = name;
     }
 
-    public String getRoleDescription() {
-        return roleDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRoleDescription(final String roleDescription) {
-        this.roleDescription = roleDescription;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
     @Override
@@ -76,14 +81,15 @@ public class Role implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Role role)) {
+        if (!(o instanceof Role)) {
             return false;
         }
-        return id.equals(role.id);
+        final Role role = (Role) o;
+        return Objects.equals(id, role.id) && Objects.equals(name, role.name) && Objects.equals(description, role.description) && Objects.equals(user, role.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, description, user);
     }
 }

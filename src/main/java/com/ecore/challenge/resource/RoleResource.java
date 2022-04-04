@@ -14,9 +14,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-
 @RestController
 @RequestMapping(value = "/roles")
+
 public class RoleResource {
 
     @Autowired
@@ -34,18 +34,10 @@ public class RoleResource {
         return ResponseEntity.ok().body(roleObj);
     }
 
-    @RequestMapping(value = "/name/{roleName}", method = RequestMethod.GET)
-    public ResponseEntity<Role> findRoleByName(@PathVariable final String roleName) {
-        final Role roleObj = roleService.findByRoleName(roleName);
-        return ResponseEntity.ok().body(roleObj);
-    }
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> createRole(@RequestBody Role roleObj) {
         roleObj = roleService.create(roleObj);
-
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(roleObj.getId()).toUri();
-
         return ResponseEntity.created(uri).build();
     }
 
@@ -54,26 +46,20 @@ public class RoleResource {
         roleObj.setId(id);
         roleObj.getUser().addAll(roleService.findById(id).getUser());
         roleService.update(roleObj);
-
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable final String id) {
-        roleService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @RequestMapping(value = "/changeuserrole/{roleId}/user/{memberId}", method = RequestMethod.PATCH)
-    public ResponseEntity<Role> insertMemberRole(@PathVariable final String roleId, @PathVariable final String memberId) {
-        roleService.insertMemberRole(roleId, memberId);
-        return ResponseEntity.noContent().build();
-    }
-
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getUserWithRole(@PathVariable final String userId){
+    @RequestMapping(value = "/changeuserrole/{roleId}/user/{userId}", method = RequestMethod.PATCH)
+    public ResponseEntity<Role> insertUserRole(@PathVariable final String roleId, @PathVariable final String userId) {
         roleService.verifyUserService(userId);
-        return ResponseEntity.ok().body("{ id : " + roleService.findRoleByUserId(userId)+ "}"); // TODO: Convert to JSON
+        roleService.insertUserRole(roleId, userId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/team/{teamId}/role/{roleId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> changeTeamRole(@PathVariable final String teamId, @PathVariable final String roleId) {
+        roleService.changeTeamRole(teamId, roleId);
+        return ResponseEntity.noContent().build();
     }
 
 }
