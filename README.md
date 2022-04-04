@@ -24,14 +24,14 @@ So the process flow is Role -> User -> Team
 
 The Role process should check if a user exists before assigning it a role. the same will be made to the team's endpoint.
 
-### :wrench: Improvement Points (Dev Review)
+### :wrench: Improvement Points (Dev code Review)
 * Improve and create all Test cases using Junit / Cucumber (not able to finish them all)
 * Create more exception cases and/or generic exceptions
 * Generate UUID using hibernate
 * Avoid Using Queries on Repository layer (not an issue, just clean practice)
 * Improve the Design factory with Mockito to cover more test cases.
 
-## :pencil: Improvement Points (Test Review)
+## :pencil: Improvement Points (Test Ecore Review)
 * Return the correct HTTP message to the requester
 * Use Headers 
 * Use Authentication if necessary
