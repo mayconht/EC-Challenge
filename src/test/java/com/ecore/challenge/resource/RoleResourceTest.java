@@ -56,11 +56,11 @@ public class RoleResourceTest {
         roles.add(RoleMockBuilder.getBuilder().mockRole().withId(UUID).withRoleName("Developer").withRoleDesc("Developer Role").build());
         Mockito.when(roleService.findById(UUID)).thenReturn(role);
 
-        final ResponseEntity<Role> rolef = roleResource.findRoleById(UUID);
-        final Role role = Objects.requireNonNull(rolef.getBody());
+        final ResponseEntity<Role> roleEntity = roleResource.findRoleById(UUID);
+        final Role role = Objects.requireNonNull(roleEntity.getBody());
 
-        Assertions.assertEquals(rolef.getBody(), role);
-        Assertions.assertEquals(rolef.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(roleEntity.getBody(), role);
+        Assertions.assertEquals(roleEntity.getStatusCode(), HttpStatus.OK);
     }
 
 

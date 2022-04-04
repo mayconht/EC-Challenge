@@ -41,7 +41,7 @@ public class RoleResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT) //TODO Review Put Method
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Role> updateRole(@PathVariable final String id, @RequestBody final Role roleObj) {
         roleObj.setId(id);
         roleObj.getUser().addAll(roleService.findById(id).getUser());
@@ -56,7 +56,7 @@ public class RoleResource {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/team/{teamId}/role/{roleId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/changeteamrole/{teamId}/role/{roleId}", method = RequestMethod.PATCH)
     public ResponseEntity<?> changeTeamRole(@PathVariable final String teamId, @PathVariable final String roleId) {
         roleService.changeTeamRole(teamId, roleId);
         return ResponseEntity.noContent().build();

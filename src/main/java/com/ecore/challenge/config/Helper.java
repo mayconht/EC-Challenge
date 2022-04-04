@@ -1,8 +1,9 @@
 package com.ecore.challenge.config;
 
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import com.ecore.challenge.domain.Role;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Helper {
 
@@ -36,4 +38,19 @@ public class Helper {
         }
         return result;
     }
+
+    public static List<Role> convertJsonArrayToRole(final String roles) throws JSONException {
+       return Helper.convertJsonToList(new JSONArray(roles)).stream().map(jsonObject -> {
+            try {
+                return new Role(jsonObject.getString("id"),
+                        jsonObject.getString("name"),
+                        jsonObject.getString("description"));
+            } catch (final JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).collect(Collectors.toList());
+    }
 }
+
+
