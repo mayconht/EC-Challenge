@@ -5,6 +5,7 @@
 ### Running the project locally:
 make sure your JAVA_HOME is working properly with version 17+
 > ./mvnw spring-boot-run
+
 http://localhost:8080/roles
 
 
